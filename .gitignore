@@ -1,0 +1,8 @@
+__pycache__/
+
+.idea
+todoapp/migrations
+.env
+venv
+main.py
+db.sqlite3

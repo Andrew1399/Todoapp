@@ -1,0 +1,172 @@
+{% extends 'todoapp/base.html' %}
+
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Make a button to return to tasks page-->
+
+{% block title %}
+    Task
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
+            <div class="card border-0 shadow">
+                <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple5/v4/37/33/4d/37334d73-331b-0c94-7649-689043466b6a/source/512x512bb.jpg" alt="...">
+                <div class="card-body p-1-9 p-xl-5">
+                    <div class="mb-4">
+                        <h2 class="h2 mb-0">Task: {{task.title}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="ps-lg-1-6 ps-xl-5">
+                <div class="mb-5 wow fadeIn">
+                    <div class="text-start mb-1-6 wow fadeIn">
+                        <h2 class="h1 mb-0 text-primary">#Description</h2>
+                    </div>
+                    {% if not task.content %}
+                        <h5>There is no information. Please add a description of your task!</h5>
+                    {% else %}
+                        <p class="mb-0">{{task.content}}</p>
+                    {% endif %}
+                </div>
+                <div class="mb-5 wow fadeIn">
+                    <div class="text-start mb-1-6 wow fadeIn">
+                        <h2 class="mb-0 text-primary">#Information</h2>
+                    </div>
+                    <div class="row mt-n4">
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    <h3 class="h5 mb-3">Created</h3>
+                                    <p class="mb-0">{{task.date_added}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    {% if task.completed == False %}
+                                        <i class='fas fa-toggle-off'></i>
+                                    {% else %}
+                                        <i class='fas fa-toggle-on'></i>
+                                    {% endif %}
+                                    <h3 class="h5 mb-3">Status</h3>
+                                    <p class="mb-0">
+                                        {% if task.completed == False %}
+                                          <h5 class="mb-0"><span class="badge bg-success">In process</span></h5>
+                                        {% else %}
+                                          <h5 class="mb-0"><span class="badge bg-danger">Done</span></h5>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    <i class='far fa-calendar-alt'></i>
+                                    <h3 class="h5 mb-3">Finished</h3>
+                                    {% if task.completed == True %}
+                                        {% if task.updated_at %}
+                                            <p class="mb-0">{{task.updated_at}}</p>
+                                        {% else %}
+                                         <h5>This task have not been finished yet</h5>
+                                        {% endif %}
+                                    {% else %}
+                                    <h6>This task is still in process!</h6>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5 wow fadeIn">
+                    <div class="text-start mb-1-6 wow fadeIn">
+                        <h2 class="mb-0 text-primary">#Counter</h2>
+                    </div>
+                    <div class="row mt-n4">
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    <i class='far fa-clock'></i>
+                                    <h3 class="h5 mb-3">Total Time</h3>
+                                    {% if task.completed == True %}
+                                        <p class="mb-0">{{task.count_time_completing}} days</p>
+                                    {% else %}
+                                        <h6>Task is in process!</h6>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    <i class='far fa-hourglass'></i>
+                                    <h3 class="h5 mb-3">In process</h3>
+                                    <p class="mb-0">{{task.count_time_in_process}} days</p>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                     <i class='far fa-hourglass'></i>
+                                     <h3 class="h5 mb-3">Desired time</h3>
+                                     <p class="mb-0">{{task.desired_time}} days</p>
+                                </div>
+                            </div>
+                    </div>
+
+                </div>
+                <div class="mb-5 wow fadeIn">
+
+<!--            <button class="me-2 btn btn-link">Cancel</button>-->
+                        <a class="btn btn-primary" href="{% url 'todoapp:update_task' task.id %}">Edit task</a>
+                    </div>
+<!--                <div class="wow fadeIn">-->
+<!--                    <div class="text-start mb-1-6 wow fadeIn">-->
+<!--                        <h2 class="mb-0 text-primary">#Skills &amp; Experience</h2>-->
+<!--                    </div>-->
+<!--                    <p class="mb-4">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose.</p>-->
+<!--                    <div class="progress-style1">-->
+<!--                        <div class="progress-text">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6 fw-bold">Wind Turbines</div>-->
+<!--                                <div class="col-6 text-end">70%</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="custom-progress progress rounded-3 mb-4">-->
+<!--                            <div class="animated custom-bar progress-bar slideInLeft" style="width:70%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" role="progressbar"></div>-->
+<!--                        </div>-->
+<!--                        <div class="progress-text">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6 fw-bold">Solar Panels</div>-->
+<!--                                <div class="col-6 text-end">90%</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="custom-progress progress rounded-3 mb-4">-->
+<!--                            <div class="animated custom-bar progress-bar bg-secondary slideInLeft" style="width:90%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>-->
+<!--                        </div>-->
+<!--                        <div class="progress-text">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6 fw-bold">Hybrid Energy</div>-->
+<!--                                <div class="col-6 text-end">80%</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="custom-progress progress rounded-3">-->
+<!--                            <div class="animated custom-bar progress-bar bg-dark slideInLeft" style="width:80%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{{task.count_time_completing}}

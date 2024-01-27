@@ -1,0 +1,25 @@
+{% extends 'todoapp/base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}
+    Add a new task
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-md-12">
+                <h2 class="text-center">New Todo</h2>
+                <form action="{% url 'todoapp:new_task' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {% bootstrap_form form %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add task</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </div>
+{%  endblock %}

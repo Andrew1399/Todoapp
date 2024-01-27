@@ -1,0 +1,63 @@
+{% extends 'todoapp/base.html' %}
+
+{% block content %}
+
+<section id="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Your Todo List</h1>
+        <p> Todoapp is an application where you can create your own list of tasks which you wanna do or you've already done
+        and just want to mark it as done. You can see the information about every task that is in process. You can
+        see how many days this task is in process or set desired time for your task. You can edit your task anytime
+        or delete it if you want. Start your todo list and create your tasks so you can see the time you need to do
+        the task.</p>
+        <p>A few steps to start your todo list:</p>
+        <p>- Sign up or login if you're already registered</p>
+        <p>- Open your tasks list and create your task </p>
+        <p>- Click on the information button and then edit button if you want to change the status or information
+        {% if user.is_authenticated %}
+        <p><a href="{% url 'todoapp:tasks_list'  %}"> <button type="button" class="btn btn-dark btn-large">Your tasks</button></a></p>
+        {% endif %}
+      </div>
+      <div class="col img-col">
+        <img height="400" width="600" src="https://www.amitree.com/wp-content/uploads/2021/12/what-is-a-task-tracker-and-why-you-need-one.jpeg" class="img-fluid" alt="Your Todo List">
+      </div>
+    </div>
+    <div class="row cards">
+
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <img width="250" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcKeOJtT4reNcCd-DI7r595BGfHFPz1dnWzg&usqp=CAU" class="icon" alt="Service One"/>
+            <h5 class="card-title">Task</h5>
+            <p class="card-text">Create your task list and set your desired time for completing the task</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <img width="250" height="300" src="https://is3-ssl.mzstatic.com/image/thumb/Purple128/v4/67/9e/ec/679eec9e-32fc-d526-5499-2a3de1800ebb/AppIcon-85-220-4-2x.png/1200x630bb.png" class="icon" alt="Service Two"/>
+            <h5 class="card-title">Process</h5>
+            <p class="card-text">Edit the information about desired time or description of your task whenever you want</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <img width="250" height="200" src="https://static.vecteezy.com/system/resources/thumbnails/000/963/090/small/cartoon-man-with-to-do-list-on-clipboard.jpg" class="icon" alt="Service Three"/>
+            <h5 class="card-title">Finish</h5>
+            <p class="card-text">Change the status of your task as done and see the time you needed for finishing it</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

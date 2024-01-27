@@ -1,0 +1,67 @@
+{% load bootstrap5 %}
+{% load static %}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+    shrink-to-fit=no">
+  <title>Learning Log</title>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!--Custom css-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/task.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'signup.css' %}">
+
+  <link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+   <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Open+Sans|Playfair+Display" rel="stylesheet">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+   <link href="{% static 'fonts/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css">
+
+  {% bootstrap_css %}
+
+
+</head>
+  <body>
+     <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+
+    <a class="navbar-brand" href="{% url 'todoapp:index' %}">
+       <i class="fab fa-leanpub"></i> Todoapp</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarCollapse" aria-controls="navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+             <a href="{% url 'todoapp:tasks_list' %}" class="nav-link">My tasks</a>
+           </li>
+            <a href="{% url 'account_logout' %}" class="nav-link">Logout</a>
+          {% endif %}
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        {% if not user.is_authenticated %}
+           <li class="nav-item">
+             <a href="{% url 'account_signup' %}" class="nav-link">Sign up</a>
+           </li>
+             <a href="{% url 'account_login' %}" class="nav-link">Login</a>
+        {% endif %}
+      </ul>
+    </div>
+
+  </nav>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> <script src="https://kit.fontawesome.com/15974f9624.js" crossorigin="anonymous"></script>
+
+    {% block content %}
+
+    {% endblock %}
+
+  </body>
+</html>
