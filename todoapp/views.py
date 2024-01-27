@@ -1,11 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic.list import ListView
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from todoapp.models import TodoList
 from todoapp.forms import CreateUpdateTaskForm
@@ -13,27 +7,6 @@ from todoapp.forms import CreateUpdateTaskForm
 
 def index(request):
     return render(request, 'todoapp/index.html')
-
-class CustomLoginView(LoginView):
-    template_name = 'todoapp/login.html'
-    fields = '__all__'
-    redirect_authenticated_user = True
-
-    def get_success_url(self):
-        return reverse_lazy('todo_list')
-
-
-class RegisterView(FormView):
-    template_name = 'todoapp/register.html'
-    form_class = FormView
-    redirect_authenticated_user = True
-    success_url = 'todo_list'
-
-    def form_valid(self, form):
-        user = form.save()
-        if user is not None:
-            login(self.request, user)
-        return super(RegisterView, self).form_valid(form)
 
 @login_required
 def tasks_list(request):
@@ -98,28 +71,3 @@ def delete_task(request, id):
     task = get_object_or_404(TodoList, id=id, user=request.user)
     task.delete()
     return redirect('todoapp:tasks_list')  #or HttpResponseRedirect and reverse_lazy???
-
-
-
-
-# class TodoListView(LoginRequiredMixin, ListView):
-#     template_name = 'todoapp/todo_list.html'
-#     model = TodoList
-#     context_object_name = 'tasks'
-#     login_url = 'login-page'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['tasks'] = context['tasks'].filter(user=self.request.user)
-#         context['count'] = context['']
-#
-# class TaskCreateView(LoginRequiredMixin, CreateView):
-#     model = TodoList
-#     fields = ['title', 'description', 'completed']
-#     success_url = 'todo_list'
-#
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super(TaskCreateView, self).form_valid(form)
-
-
