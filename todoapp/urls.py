@@ -12,7 +12,4 @@ urlpatterns = [
     path('mark_complete/<int:id>/', views.mark_as_completed, name='mark_complete'),
     path('mark_incomplete/<int:id>', views.mark_as_incomplete, name='mark_incomplete'),
     path('delete_task/<int:id>/', views.delete_task, name='delete_task'),
-    path('login/', views.CustomLoginView.as_view(), name='login'),
-    path('register/', views.RegisterView.as_view(), name='register'),
-    path('logout/', views.LogoutView.as_view(), name='logout')
 ]
