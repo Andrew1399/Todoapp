@@ -2,7 +2,7 @@
 Application for creating tasks
 
 
-![image](https://prnt.sc/ia0j0o5yFUhW)
+![todo](https://github.com/Andrew1399/Todoapp/assets/102066744/52e4f50e-a41b-4d05-a216-f54f04eed38f)
 
 # Technology Stack
 - Python 3.9
